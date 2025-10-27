@@ -1,0 +1,26 @@
+<style>body {margin: 0;padding: 0;}</style>
+<canvas style="width: 100vw;height: 100vh;"></canvas>
+<script>
+const times = [];
+const ctx = document.getElementsByTagName('canvas')[0].getContext('2d');
+const dpr = window.devicePixelRatio || 1;
+const startTime = performance.now();
+function loop(){
+    ctx.canvas.width = window.innerWidth * dpr,ctx.canvas.height = window.innerHeight * dpr;
+    ctx.fillRect(ctx.canvas.width / 2 - 5,120,10,ctx.canvas.height - 120);
+    ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height - 120) / 2 - 150,20,300);
+    ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime - 1000) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height - 120) / 2 - 150,20,300);
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.font = '100px sans-serif';
+    ctx.fillText(`${times.reduce((acc, num) => acc + num, 0) / times.length || 0}ms`,ctx.canvas.width / 2,10);
+    requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+function pushTime(){
+    const offset = (performance.now() - startTime) % 1000;
+    times.push(offset - (offset > 500 ? 1000 : 0));
+}
+document.addEventListener('pointerdown',pushTime);
+document.addEventListener('keydown',pushTime);
+</script>
