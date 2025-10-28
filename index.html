@@ -7,13 +7,14 @@ const dpr = window.devicePixelRatio || 1;
 const startTime = performance.now();
 function loop(){
     ctx.canvas.width = window.innerWidth * dpr,ctx.canvas.height = window.innerHeight * dpr;
-    ctx.fillRect(ctx.canvas.width / 2 - 5,120,10,ctx.canvas.height - 120);
-    ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height - 120) / 2 - 150,20,300);
-    ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime - 1000) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height - 120) / 2 - 150,20,300);
+    ctx.fillRect(ctx.canvas.width / 2 - 5,230,10,ctx.canvas.height - 230);
+    ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height + 230) / 2 - 150,20,300);
+    ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime - 1000) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height + 230) / 2 - 150,20,300);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     ctx.font = '100px sans-serif';
-    ctx.fillText(`${times.reduce((acc, num) => acc + num, 0) / times.length || 0}ms`,ctx.canvas.width / 2,10);
+    ctx.fillText(`last ${times[times.length-1] || 0}ms`,ctx.canvas.width / 2,10);
+    ctx.fillText(`avg ${times.reduce((acc, num) => acc + num, 0) / times.length || 0}ms`,ctx.canvas.width / 2,120);
     requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
