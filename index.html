@@ -7,6 +7,7 @@ const dpr = window.devicePixelRatio || 1;
 const startTime = performance.now();
 function loop(){
     ctx.canvas.width = window.innerWidth * dpr,ctx.canvas.height = window.innerHeight * dpr;
+    ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height)
     ctx.fillRect(ctx.canvas.width / 2 - 5,230,10,ctx.canvas.height - 230);
     ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height + 230) / 2 - 150,20,300);
     ctx.fillRect(ctx.canvas.width + -(performance.now() - startTime - 1000) % 2000 / 2000 * ctx.canvas.width - 10,(ctx.canvas.height + 230) / 2 - 150,20,300);
